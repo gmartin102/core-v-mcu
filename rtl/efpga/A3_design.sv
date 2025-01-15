@@ -1,0 +1,297 @@
+// Copyright 2021 QuickLogic
+// Solderpad Hardware License, Version 2.1, see LICENSE.md for details.
+// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+`include "pulp_soc_defines.svh"
+module A3_design (
+    input wire [9:0] 		 CCFF_HEAD_i,
+    input wire 			 CFG_CLK_i,
+    input wire 			 CFG_DONE_i,
+    input wire 			 CFG_RST_ni,
+    input wire [ 3:0] 		 CLK_i,
+    input wire [31:0] 		 PL_ADDR_i,
+    input wire 			 PL_CLK_i,
+    input wire [35:0] 		 PL_DATA_i,
+    output wire [35:0] 		 PL_DATA_o,
+    input wire 			 PL_ENA_i,
+    input wire 			 PL_INIT_i,
+    input wire 			 PL_REN_i,
+    input wire [ 1:0] 		 PL_WEN_i,
+    input wire 			 RST_ni,
+    output wire [9:0] 		 CCFF_TAIL_o,
+
+    output wire [31:0] 		 PWDATA,
+    input wire 			 PREADY,
+    input wire [31:0] 		 PRDATA,
+    output wire 		 PSEL,
+    output wire 		 PENABLE,
+    output wire 		 PWRITE,
+    output wire [8:0] 		 PADDR,
+    output logic [`N_FPGAIO-1:0] fpgaio_oe,
+    output logic [`N_FPGAIO-1:0] fpgaio_out,
+    input logic [`N_FPGAIO-1:0]  fpgaio_in,
+    input logic [19:0] 		 lint_ADDR,
+    input logic 		 lint_WEN,
+    input logic 		 lint_REQ,
+    input logic [ 3:0] 		 lint_BE,
+    input logic [31:0] 		 lint_WDATA,
+    input logic [31:0] 		 control_in,
+    input logic [31:0] 		 tcdm_rdata_p0,
+    input logic 		 tcdm_gnt_p0,
+    input logic 		 tcdm_fmo_p0,
+    input logic 		 tcdm_valid_p0,
+
+    output logic [31:0] 	 status_out,
+    output logic [ 7:0] 	 version,
+    output logic [15:0] 	 events_o,
+
+    output logic [31:0] 	 lint_RDATA,
+    output logic 		 lint_GNT,
+    output logic 		 lint_VALID,
+
+    output logic [31:0] 	 tcdm_wdata_p0,
+    output logic [19:0] 	 tcdm_addr_p0,
+    output logic 		 tcdm_req_p0,
+    output logic 		 tcdm_wen_p0,
+    output logic [3:0] 		 tcdm_be_p0,
+    input [19:0] 		 SCAN_i,
+    input 			 SCAN_EN_i,
+    input 			 SCAN_MODE_i,
+    input 			 SCAN_RST_ni,
+    input 			 SCAN_CFG_DONE_i,
+    output [19:0] 		 SCAN_o
+
+);
+
+  wire [19:0] F2A_B1_o, F2A_B2_o, F2A_B3_o, F2A_B4_o, F2A_B5_o, F2A_B6_o, F2A_B7_o, F2A_B8_o;
+  wire [19:0] F2A_T1_o, F2A_T2_o, F2A_T3_o, F2A_T4_o, F2A_T5_o, F2A_T6_o, F2A_T7_o, F2A_T8_o;
+  wire [19:0] F2A_L1_o, F2A_L2_o, F2A_L3_o, F2A_L4_o, F2A_L5_o, F2A_L6_o;
+  wire [19:0] F2A_R1_o, F2A_R2_o, F2A_R3_o, F2A_R4_o, F2A_R5_o, F2A_R6_o;
+  wire [19:0] A2F_B1_o, A2F_B2_o, A2F_B3_o, A2F_B4_o, A2F_B5_o, A2F_B6_o, A2F_B7_o, A2F_B8_o;
+  wire [19:0] A2F_T1_i, A2F_T2_i, A2F_T3_i, A2F_T4_i, A2F_T5_i, A2F_T6_i, A2F_T7_i, A2F_T8_i;
+  wire [19:0] A2F_L1_i, A2F_L2_i, A2F_L3_i, A2F_L4_i, A2F_L5_i, A2F_L6_i;
+  wire [19:0] A2F_R1_i, A2F_R2_i, A2F_R3_i, A2F_R4_i, A2F_R5_i, A2F_R6_i;
+
+
+  assign PSEL = F2A_R2_o[0];
+  assign PWRITE = F2A_R2_o[1];
+  assign PENABLE = F2A_R2_o[2];
+  assign PWDATA[15:0] = F2A_R3_o[15:0];
+  assign PWDATA[31:16] = F2A_R4_o[15:0];
+  assign PADDR = F2A_R5_o[8:0];
+  assign A2F_R1_i = 20'h0;
+  assign A2F_R2_i = PRDATA[19:0];
+  assign A2F_R3_i = {PREADY, 7'h0, PRDATA[31:20]};
+  assign A2F_R4_i = {4'h0, control_in[31:16]};
+  assign A2F_R5_i = {4'h0, control_in[15:0]};
+  assign A2F_R6_i = 20'h0;
+
+  assign tcdm_addr_p0 = F2A_T2_o;
+  assign status_out[31:12] = F2A_T6_o;
+  assign status_out[11:0] = F2A_T7_o[19:8];
+  assign version = F2A_T7_o[7:0];
+
+  assign fpgaio_oe[40+:3] = F2A_B1_o[2:0];
+  assign fpgaio_out[40+:3] = F2A_B1_o[5:3];
+  assign A2F_B1_i = {17'h0, fpgaio_in[40+:3]};
+  assign A2F_B2_i = 20'h0;
+  assign A2F_B3_i = 20'h0;
+  assign A2F_B4_i = 20'h0;
+  assign fpgaio_oe[0+:20] = F2A_B2_o;
+  assign fpgaio_out[0+:20] = F2A_B3_o;
+  assign A2F_B5_i = fpgaio_in[0+:20];
+  assign fpgaio_oe[20+:20] = F2A_B4_o;
+  assign fpgaio_out[20+:20] = F2A_B5_o;
+  assign A2F_B6_i = fpgaio_in[20+:20];
+
+  assign events_o = F2A_L1_o[15:0];
+  assign lint_GNT = F2A_L1_o[18];
+  assign lint_VALID = F2A_L1_o[19];
+
+  // output
+  assign lint_RDATA[15:0] = F2A_L2_o[15:0];
+  assign lint_RDATA[31:16] = F2A_L3_o[15:0];
+  assign A2F_L2_i = {4'h0, lint_WDATA[15:0]};
+  assign A2F_L3_i = {4'h0, lint_WDATA[31:16]};
+  assign A2F_L4_i = lint_ADDR;
+  assign A2F_L1_i = {14'h0, lint_BE, lint_WEN, lint_REQ};
+
+
+  assign tcdm_wdata_p0[31:12] = F2A_T3_o;
+  assign tcdm_wdata_p0[11:0] = F2A_T4_o[11:0];
+  assign tcdm_req_p0 = F2A_T5_o[0];
+  assign tcdm_wen_p0 = F2A_T5_o[1];
+  assign tcdm_be_p0 = F2A_T4_o[5:2];
+  assign A2F_T5_i = {tcdm_fmo_p0, 3'b000, tcdm_rdata_p0[31:16]};
+  assign A2F_T6_i = {tcdm_gnt_p0, tcdm_valid_p0, 2'b00, tcdm_rdata_p0[15:0]};
+
+
+  //Arnold3_Design (  // use this to go to A2F/F2A
+  A3_fpga Arnold3_Design (
+      .CCFF_HEAD_i(CCFF_HEAD_i[9:0]),
+      .CFG_CLK_i(CFG_CLK_i),
+      .CFG_DONE_i(CFG_DONE_i),
+      .CFG_RST_ni(CFG_RST_ni),
+      .CLK_i(CLK_i[3:0]),
+      .PL_ADDR_i(PL_ADDR_i),
+      .PL_CLK_i(PL_CLK_i),
+      .PL_DATA_i(PL_DATA_i),
+      .PL_ENA_i(PL_ENA_i),
+      .PL_INIT_i(PL_INIT_i),
+      .PL_REN_i(PL_REN_i),
+      .PL_WEN_i(PL_WEN_i),
+      .RST_ni(RST_ni),
+      .SCAN_EN_i(SCAN_EN_i),
+      .SCAN_MODE_i(SCAN_MODE_i),
+      .SCAN_RST_ni(SCAN_RST_ni),
+      .SCAN_CFG_DONE_i(SCAN_CFG_DONE_i),
+      .SCAN_i(SCAN_i),
+      .CCFF_TAIL_o(CCFF_TAIL_o[9:0]),
+      .F2A_CLK_B1_o(),
+      .F2A_CLK_B2_o(),
+      .F2A_CLK_B3_o(),
+      .F2A_CLK_B4_o(),
+      .F2A_CLK_B5_o(),
+      .F2A_CLK_B6_o(),
+      .F2A_CLK_B7_o(),
+      .F2A_CLK_B8_o(),
+      .F2A_CLK_L1_o(),
+      .F2A_CLK_L2_o(),
+      .F2A_CLK_L3_o(),
+      .F2A_CLK_L4_o(),
+      .F2A_CLK_L5_o(),
+      .F2A_CLK_L6_o(),
+      .F2A_CLK_R1_o(),
+      .F2A_CLK_R2_o(),
+      .F2A_CLK_R3_o(),
+      .F2A_CLK_R4_o(),
+      .F2A_CLK_R5_o(),
+      .F2A_CLK_R6_o(),
+      .F2A_CLK_T1_o(),
+      .F2A_CLK_T2_o(),
+      .F2A_CLK_T3_o(),
+      .F2A_CLK_T4_o(),
+      .F2A_CLK_T5_o(),
+      .F2A_CLK_T6_o(),
+      .F2A_CLK_T7_o(),
+      .F2A_CLK_T8_o(),
+      .F2A_DEF0_B1_o(),
+      .F2A_DEF0_B2_o(),
+      .F2A_DEF0_B3_o(),
+      .F2A_DEF0_B4_o(),
+      .F2A_DEF0_B5_o(),
+      .F2A_DEF0_B6_o(),
+      .F2A_DEF0_B7_o(),
+      .F2A_DEF0_B8_o(),
+      .F2A_DEF0_L1_o(),
+      .F2A_DEF0_L2_o(),
+      .F2A_DEF0_L3_o(),
+      .F2A_DEF0_L4_o(),
+      .F2A_DEF0_L5_o(),
+      .F2A_DEF0_L6_o(),
+      .F2A_DEF0_R1_o(),
+      .F2A_DEF0_R2_o(),
+      .F2A_DEF0_R3_o(),
+      .F2A_DEF0_R4_o(),
+      .F2A_DEF0_R5_o(),
+      .F2A_DEF0_R6_o(),
+      .F2A_DEF0_T1_o(),
+      .F2A_DEF0_T2_o(),
+      .F2A_DEF0_T3_o(),
+      .F2A_DEF0_T4_o(),
+      .F2A_DEF0_T5_o(),
+      .F2A_DEF0_T6_o(),
+      .F2A_DEF0_T7_o(),
+      .F2A_DEF0_T8_o(),
+      .F2A_DEF1_B1_o(),
+      .F2A_DEF1_B2_o(),
+      .F2A_DEF1_B3_o(),
+      .F2A_DEF1_B4_o(),
+      .F2A_DEF1_B5_o(),
+      .F2A_DEF1_B6_o(),
+      .F2A_DEF1_B7_o(),
+      .F2A_DEF1_B8_o(),
+      .F2A_DEF1_L1_o(),
+      .F2A_DEF1_L2_o(),
+      .F2A_DEF1_L3_o(),
+      .F2A_DEF1_L4_o(),
+      .F2A_DEF1_L5_o(),
+      .F2A_DEF1_L6_o(),
+      .F2A_DEF1_R1_o(),
+      .F2A_DEF1_R2_o(),
+      .F2A_DEF1_R3_o(),
+      .F2A_DEF1_R4_o(),
+      .F2A_DEF1_R5_o(),
+      .F2A_DEF1_R6_o(),
+      .F2A_DEF1_T1_o(),
+      .F2A_DEF1_T2_o(),
+      .F2A_DEF1_T3_o(),
+      .F2A_DEF1_T4_o(),
+      .F2A_DEF1_T5_o(),
+      .F2A_DEF1_T6_o(),
+      .F2A_DEF1_T7_o(),
+      .F2A_DEF1_T8_o(),
+
+      .F2A_B1_o(F2A_B1_o),
+      .F2A_B2_o(F2A_B2_o),
+      .F2A_B3_o(F2A_B3_o),
+      .F2A_B4_o(F2A_B4_o),
+      .F2A_B5_o(F2A_B5_o),
+      .F2A_B6_o(F2A_B6_o),
+      .F2A_B7_o(F2A_B7_o),
+      .F2A_B8_o(F2A_B8_o),
+
+      .F2A_L1_o(F2A_L1_o),
+      .F2A_L2_o(F2A_L2_o),
+      .F2A_L3_o(F2A_L3_o),
+      .F2A_L4_o(F2A_L4_o),
+      .F2A_L5_o(F2A_L5_o),
+      .F2A_L6_o(F2A_L6_o),
+
+      .F2A_R1_o(F2A_R1_o),
+      .F2A_R2_o(F2A_R2_o),
+      .F2A_R3_o(F2A_R3_o),
+      .F2A_R4_o(F2A_R4_o),
+      .F2A_R5_o(F2A_R5_o),
+      .F2A_R6_o(F2A_R6_o),
+
+      .F2A_T1_o(F2A_T1_o),
+      .F2A_T2_o(F2A_T2_o),
+      .F2A_T3_o(F2A_T3_o),
+      .F2A_T4_o(F2A_T4_o),
+      .F2A_T5_o(F2A_T5_o),
+      .F2A_T6_o(F2A_T6_o),
+      .F2A_T7_o(F2A_T7_o),
+      .F2A_T8_o(F2A_T8_o),
+      .PL_DATA_o(PL_DATA_o),
+      .SCAN_o(),
+      .A2F_B1_i(A2F_B1_i),
+      .A2F_B2_i(A2F_B2_i),
+      .A2F_B3_i(A2F_B3_i),
+      .A2F_B4_i(A2F_B4_i),
+      .A2F_B5_i(A2F_B5_i),
+      .A2F_B6_i(A2F_B6_i),
+      .A2F_B7_i(A2F_B7_i),
+      .A2F_B8_i(A2F_B8_i),
+      .A2F_L1_i(A2F_L1_i),
+      .A2F_L2_i(A2F_L2_i),
+      .A2F_L3_i(A2F_L3_i),
+      .A2F_L4_i(A2F_L4_i),
+      .A2F_L5_i(A2F_L5_i),
+      .A2F_L6_i(A2F_L6_i),
+      .A2F_R1_i(A2F_R1_i),
+      .A2F_R2_i(A2F_R2_i),
+      .A2F_R3_i(A2F_R3_i),
+      .A2F_R4_i(A2F_R4_i),
+      .A2F_R5_i(A2F_R5_i),
+      .A2F_R6_i(A2F_R6_i),
+      .A2F_T1_i(A2F_T1_i),
+      .A2F_T2_i(A2F_T2_i),
+      .A2F_T3_i(A2F_T3_i),
+      .A2F_T4_i(A2F_T4_i),
+      .A2F_T5_i(A2F_T5_i),
+      .A2F_T6_i(A2F_T6_i),
+      .A2F_T7_i(A2F_T7_i),
+      .A2F_T8_i(A2F_T8_i)
+  );
+
+endmodule

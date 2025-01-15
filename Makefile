@@ -136,7 +136,7 @@ nexys-emul:
 					--input-xdc emulation/core-v-mcu-nexys/constraints/Nexys-A7-100T-Master.xdc \
 		                        --xilinx-core-v-mcu-sv emulation/core-v-mcu-nexys/rtl/core_v_mcu_util.v \
 					--output-xdc emulation/core-v-mcu-nexys/constraints/core-v-mcu-pin-assignment.xdc
-				util/format-verible
+#				util/format-verible
 				@echo "*************************************"
 				@echo "*                                   *"
 				@echo "* running Vivado                    *"
@@ -187,9 +187,9 @@ genesys-emul:
 					export BOARD_CLOCK_MHZ=200;\
 					export XILINX_PART=xc7k325tffg900-2;\
 					export XILINX_BOARD=digilentinc.com:genesys2:1.0;\
-					export FC_CLK_PERIOD_NS=50;\
+					export FC_CLK_PERIOD_NS=40;\
 					export PER_CLK_PERIOD_NS=200;\
-					export FPGA_CLK_PERIOD_NS=125;\
+					export FPGA_CLK_PERIOD_NS=200;\
 					export SLOW_CLK_PERIOD_NS=4000;\
 					fusesoc --cores-root . run --target=genesys2 --setup --build openhwgroup.org:systems:core-v-mcu\
 				) 2>&1 | tee lint.log

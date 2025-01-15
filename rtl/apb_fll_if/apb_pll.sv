@@ -71,7 +71,9 @@ module apb_pll # (
    logic                             LOCK;
    logic                             pll_reset_in;
 
-   logic                             bypassn;
+   logic                             s_bypassn;
+   logic                             p_bypassn;
+   logic                             c_bypassn;
    logic                             soc_clk_s;
    logic                             periph_clk_s;
    logic                             cluster_clk_s;
@@ -180,7 +182,9 @@ module apb_pll # (
    end // always_ff @ (posedge HCLK, negedge HRESETn)
    
    assign pll_reset_in = ~(PLL_RESET | ~HRESETn);
-   assign bypassn = ~BYPASS;
+   assign s_bypassn = ~(BYPASS | ControlReg[7]);
+   assign p_bypassn = ~(BYPASS | ControlReg[6]);
+   assign c_bypassn = ~(BYPASS | ControlReg[5]);
    
    PLL18_TOP u0 (
                  .CLKO(CLKO),
@@ -224,7 +228,7 @@ module apb_pll # (
  clk_dmux s_mux (
                 .clkinA_i(ref_clk_i),
                 .clkinB_i(soc_clk_s),
-                .sel_i(bypassn),
+                .sel_i(s_bypassn),
                 .rst_ni(rst_ni),
                 .clkout_o(soc_clk_o)
                 );
@@ -239,7 +243,7 @@ module apb_pll # (
  clk_dmux p_mux (
                 .clkinA_i(ref_clk_i),
                 .clkinB_i(periph_clk_s),
-                .sel_i(bypassn),
+                .sel_i(p_bypassn),
                 .rst_ni(rst_ni),
                 .clkout_o(periph_clk_o)
                 );
@@ -254,7 +258,7 @@ module apb_pll # (
  clk_dmux c_mux (
                 .clkinA_i(ref_clk_i),
                 .clkinB_i(cluster_clk_s),
-                .sel_i(bypassn),
+                .sel_i(c_bypassn),
                 .rst_ni(rst_ni),
                 .clkout_o(cluster_clk_o)
                 );

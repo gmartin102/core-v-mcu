@@ -606,9 +606,9 @@ module soc_peripherals #(
       .fpga_clk0_i(s_fpga_clk),
       .fpga_clk1_i(s_ref_clk),
       .fpga_clk2_i(s_periph_clk),
-      .fpga_clk3_i(fpgaio_in_i[9]),   // qspi clk
-      .fpga_clk4_i(fpgaio_in_i[18]),  //cam_clk
-      .fpga_clk5_i(fpgaio_in_i[30]),  // sdio_clk
+      .fpga_clk3_i(fpgaio_in_i[9]), // qspi clk
+      //   .fpga_clk4_i(fpgaio_in_i[18]),  //cam_clk
+      //   .fpga_clk5_i(fpgaio_in_i[30]),  // sdio_clk
 
 
 
@@ -636,10 +636,10 @@ module soc_peripherals #(
       .fpgaio_in_i (fpgaio_in_i),
       .fpgaio_out_o(fpgaio_out_o),
 
-      .efpga_event_o(s_efpga_events),
+      .efpga_event_o(s_efpga_events)
       //eFPGA TEST MODE
-      .testio_i(testio_i),
-      .testio_o(testio_o)
+      // .testio_i(testio_i),
+      // .testio_o(testio_o)
   );
 
   ///////////////////////////////////////////////////////////////

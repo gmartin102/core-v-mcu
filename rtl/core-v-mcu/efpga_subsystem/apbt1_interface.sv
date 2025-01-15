@@ -21,6 +21,7 @@ module apbt1_interface (
     input [31:0] efpga_rdata
 );
 
+  logic cycle_in_progress;
 
   logic req_push;
   logic req_empty;
@@ -28,12 +29,17 @@ module apbt1_interface (
   logic resp_empty;
 
   always @(posedge lint_clk or posedge lint_rst) begin
-    if (lint_rst == 1'b1) lint_valid <= 0;
-    else lint_valid <= lint_gnt;
+    if (lint_rst == 1'b1) begin
+      lint_valid <= 0;
+      cycle_in_progress <= 0;
+    end else begin
+      lint_valid <= lint_gnt;
+      cycle_in_progress <= cycle_in_progress & !lint_valid;
+    end
   end
 
-  assign req_push  = lint_req & !req_full;
-  assign lint_gnt  = !resp_empty;  // !req_full;
+  assign req_push  = (lint_req & !req_full & !cycle_in_progress);
+  assign lint_gnt  = !resp_empty & !lint_valid;  // !req_full;
 
   assign efpga_req = !req_empty;
   //assign lint_valid = !resp_empty;

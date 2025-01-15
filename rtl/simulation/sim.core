@@ -1,0 +1,27 @@
+CAPI=2:
+
+# Copyright 2021 OpenHW Group
+# Solderpad Hardware License, Version 2.1, see LICENSE.md for details.
+# SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+
+name: quicklogic.com:ip:sim
+description: efpga application
+
+filesets:
+  files_rtl:
+    files:
+     - A3_top.sv
+     - tfl/rtl/conv2d_noksa.v
+     - tfl/rtl/control.v
+     - tfl/rtl/tfl.v
+     - tfl/model/dsp.sv
+     - tfl/model/dsp_type1_bw.sv
+     - tfl/model/bw_multiplier.sv
+     - tfl/model/sdpram1024x32.sv
+     - sram512x64.v
+    file_type: systemVerilogSource
+
+targets:
+  default:
+    filesets:
+    - files_rtl

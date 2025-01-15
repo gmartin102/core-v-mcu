@@ -34,6 +34,7 @@ filesets:
     - openhwgroup.org:ip:logint_dc_fifo_xbar
     - openhwgroup.org:ip:l2_tcdm_hybrid_interco
     - quicklogic.com:ip:efpga
+    - quicklogic.com:ip:sim
     - openhwgroup.org:ip:tcdm_interconnect
     - openhwgroup.org:ip:cv32e40p
     files:
@@ -67,7 +68,7 @@ filesets:
     - rtl/core-v-mcu/fc/cv32e40p_fp_wrapper.sv
     - rtl/core-v-mcu/components/apb_soc_ctrl.sv
     - rtl/core-v-mcu/components/pulp_interfaces.sv
-    - rtl/core-v-mcu/efpga_subsystem/efpga_subsystem.sv
+    - rtl/core-v-mcu/efpga_subsystem/A3_efpga_subsystem.sv
     - rtl/core-v-mcu/efpga_subsystem/A2_fifo.sv
     - rtl/core-v-mcu/efpga_subsystem/A2_fifo_ctl.sv
     - rtl/core-v-mcu/efpga_subsystem/A2_fifo_ram.sv
@@ -87,8 +88,8 @@ filesets:
     - rtl/simulation/PLL18_TOP.sv
     - rtl/simulation/core_v_mcu_sim_ram.sv
     - rtl/simulation/sram512x64.v
-    - rtl/simulation/top.sv
-    - rtl/simulation/top1_wrapper.sv
+#    - rtl/simulation/A3_top.sv
+#    - rtl/simulation/top1_wrapper.sv
     - rtl/simulation/a2_bootrom.sv
     file_type: systemVerilogSource
   not_emulation-rtl:
@@ -107,8 +108,8 @@ filesets:
     - emulation/xilinx/rtl/pulp_clock_gating_xilinx.sv
     - emulation/xilinx/rtl/sram512x64.v
     - emulation/xilinx/rtl/DW02_mac.sv
-    - rtl/simulation/top.sv
-    - rtl/simulation/top1_wrapper.sv
+    - rtl/simulation/A3_top.sv
+#    - rtl/simulation/A3_fpga.sv
     - rtl/simulation/a2_bootrom.sv
     file_type: systemVerilogSource
   nexys-ips:
