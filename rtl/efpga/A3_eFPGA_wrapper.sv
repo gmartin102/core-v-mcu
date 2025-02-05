@@ -87,15 +87,17 @@ module eFPGA_wrapper (
     output logic [3:0] tcdm_be_p3,
     tcdm_be_p2,
     tcdm_be_p1,
-    tcdm_be_p0,
-    inout              VSSC,
-    VDDC_FPGA,
-    NB,
-    PB
+    tcdm_be_p0
+//    inout              VSSC,
+//    VDDC_FPGA,
+//    NB,
+//    PB
 
 
 );
-
+   supply1             VDDC_FPGA;
+   supply0             VSSC;
+   
   wire        psel_s;
   wire        penable_s;
   wire        pwrite_s;

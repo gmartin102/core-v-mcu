@@ -89,7 +89,7 @@ sim:
 
 .PHONY:buildsim
 buildsim: pseudo-uart
-	fusesoc --cores-root . run --no-export --target=sim --setup --build openhwgroup.org:systems:core-v-mcu 2>&1 | tee buildsim.log
+	python3 ~/fusesoc/fusesoc/main.py --cores-root . run --no-export --target=sim --setup --build openhwgroup.org:systems:core-v-mcu 2>&1 | tee buildsim.log
 
 ###############################################################################
 # XCELIUM targets
@@ -97,7 +97,7 @@ buildsim: pseudo-uart
 # buildsim-xcelium is kept for backward compatibility
 .PHONY:buildsim-xcelium
 buildsim-xcelium: pseudo-uart
-	fusesoc --cores-root . run --no-export --target=sim --setup --build --tool=xcelium openhwgroup.org:systems:core-v-mcu 2>&1 | tee buildsim.log
+	python3 ~/fusesoc/fusesoc/main.py --cores-root . run --no-export --target=sim --setup --build --tool=xcelium openhwgroup.org:systems:core-v-mcu 2>&1 | tee buildsim.log
 
 .PHONY: clean-xcelium
 clean-xcelium: clean
@@ -105,7 +105,7 @@ clean-xcelium: clean
 
 .PHONY: build-xcelium
 build-xcelium: pseudo-uart
-	fusesoc --cores-root . run --no-export --target=sim --setup --build --tool=xcelium openhwgroup.org:systems:core-v-mcu 2>&1 | tee buildsim.log
+	python3 ~/fusesoc/fusesoc/main.py --cores-root . run --no-export --target=sim --setup --build --tool=xcelium openhwgroup.org:systems:core-v-mcu 2>&1 | tee buildsim.logs
 
 .PHONY: sim-xcelium
 sim-xcelium: build-xcelium

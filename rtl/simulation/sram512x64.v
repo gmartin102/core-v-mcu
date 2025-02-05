@@ -13,11 +13,11 @@ module sram512x64
  input [8:0]   aA,
  input [8:0]   aB,
  input [63:0]  d,
- input [63:0]  bw,
+ input [63:0] bw,
  output [63:0] q );
 
    reg [63:0]  out;
-   reg [63:0] storage [511:0];
+   reg [63:0] storage [512];
 
    assign q = out;
 

@@ -260,7 +260,7 @@ module core_v_mcu_tb;
         $display("asserting reset");
         bootsel = 1'b1;
         resetn = 1'b0;
-        resetn = #(4*BAUD_CLK_PERIOD) 1'b1;
+        resetn = #(40*BAUD_CLK_PERIOD) 1'b1;
        #(5*BAUD_CLK_PERIOD) bootsel = 1'b1;
 
         $display("releasing reset");

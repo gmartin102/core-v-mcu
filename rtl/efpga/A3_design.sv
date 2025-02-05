@@ -66,7 +66,7 @@ module A3_design (
   wire [19:0] F2A_T1_o, F2A_T2_o, F2A_T3_o, F2A_T4_o, F2A_T5_o, F2A_T6_o, F2A_T7_o, F2A_T8_o;
   wire [19:0] F2A_L1_o, F2A_L2_o, F2A_L3_o, F2A_L4_o, F2A_L5_o, F2A_L6_o;
   wire [19:0] F2A_R1_o, F2A_R2_o, F2A_R3_o, F2A_R4_o, F2A_R5_o, F2A_R6_o;
-  wire [19:0] A2F_B1_o, A2F_B2_o, A2F_B3_o, A2F_B4_o, A2F_B5_o, A2F_B6_o, A2F_B7_o, A2F_B8_o;
+  wire [19:0] A2F_B1_i, A2F_B2_i, A2F_B3_i, A2F_B4_i, A2F_B5_i, A2F_B6_i, A2F_B7_i, A2F_B8_i;
   wire [19:0] A2F_T1_i, A2F_T2_i, A2F_T3_i, A2F_T4_i, A2F_T5_i, A2F_T6_i, A2F_T7_i, A2F_T8_i;
   wire [19:0] A2F_L1_i, A2F_L2_i, A2F_L3_i, A2F_L4_i, A2F_L5_i, A2F_L6_i;
   wire [19:0] A2F_R1_i, A2F_R2_i, A2F_R3_i, A2F_R4_i, A2F_R5_i, A2F_R6_i;
@@ -102,6 +102,8 @@ module A3_design (
   assign fpgaio_oe[20+:20] = F2A_B4_o;
   assign fpgaio_out[20+:20] = F2A_B5_o;
   assign A2F_B6_i = fpgaio_in[20+:20];
+   assign A2F_B7_i = 20'h0;
+   assign A2F_B8_i = 20'h0;
 
   assign events_o = F2A_L1_o[15:0];
   assign lint_GNT = F2A_L1_o[18];
@@ -126,7 +128,7 @@ module A3_design (
 
 
   //Arnold3_Design (  // use this to go to A2F/F2A
-  A3_fpga Arnold3_Design (
+  fpga_top Arnold3_Design (
       .CCFF_HEAD_i(CCFF_HEAD_i[9:0]),
       .CFG_CLK_i(CFG_CLK_i),
       .CFG_DONE_i(CFG_DONE_i),

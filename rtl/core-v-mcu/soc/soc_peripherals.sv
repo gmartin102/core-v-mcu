@@ -301,12 +301,12 @@ module soc_peripherals #(
       .soc_clk_o(soc_clk_o),
       .periph_clk_o(s_periph_clk),
       .cluster_clk_o(s_fpga_clk),
-      .ref_clk_o(s_ref_clk),
-      .AVDD(AVDD),
-      .AVDD2(AVDD2),
-      .AVSS(AVSS),
-      .VDDC(VDDC),
-      .VSSC(VSSC)
+      .ref_clk_o(s_ref_clk)
+//      .AVDD(AVDD),
+//      .AVDD2(AVDD2),
+//      .AVSS(AVSS),
+//      .VDDC(VDDC),
+//      .VSSC(VSSC)
   );
 
 

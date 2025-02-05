@@ -36,10 +36,12 @@ module apb_pll # (
     input logic                      PENABLE,
     output logic [31:0]              PRDATA,
     output logic                     PREADY,
-    output logic                     PSLVERR,
-    inout AVDD,AVDD2,AVSS,VDDC,VSSC
+    output logic                     PSLVERR
+//    inout AVDD,AVDD2,AVSS,VDDC,VSSC
     );
-
+   supply0                           AVSS, VSSC;
+   supply1                           AVDD, AVDD2, VDDC;
+   
    logic                             PD; // PLL powerdown
    logic                             PDDP; // Post Divider PowerDown
    logic [5:0]                       DM; // Reference input divider

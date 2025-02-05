@@ -1,6 +1,7 @@
 # required argument: path to bitstream file
 open_hw_manager
-connect_hw_server
+#connect_hw_server
+connect_hw_server -url 10.0.2.2:3121
 set targets [get_hw_targets]
 foreach x $targets {
     puts "working on ";; puts $x

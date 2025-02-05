@@ -88,7 +88,7 @@ filesets:
     - rtl/simulation/PLL18_TOP.sv
     - rtl/simulation/core_v_mcu_sim_ram.sv
     - rtl/simulation/sram512x64.v
-#    - rtl/simulation/A3_top.sv
+    - rtl/simulation/fpga_top.sv
 #    - rtl/simulation/top1_wrapper.sv
     - rtl/simulation/a2_bootrom.sv
     file_type: systemVerilogSource
@@ -109,7 +109,6 @@ filesets:
     - emulation/xilinx/rtl/sram512x64.v
     - emulation/xilinx/rtl/DW02_mac.sv
     - rtl/simulation/A3_top.sv
-#    - rtl/simulation/A3_fpga.sv
     - rtl/simulation/a2_bootrom.sv
     file_type: systemVerilogSource
   nexys-ips:
