@@ -11,7 +11,7 @@ module sdpram1024x32 (
     output logic [31:0] rdata_b
 );
 
-  wire [63:0]   tpram_bit_write;
+  wire [7:0]   tpram_bit_write;
   wire [63:0]   tpram_r_data;
   reg    laddr_0;
 
@@ -19,11 +19,10 @@ module sdpram1024x32 (
     laddr_0 <= cen_b ? laddr_0 : addr_b[0];
   end
   assign rdata_b = laddr_0 ? tpram_r_data[63:32] : tpram_r_data[31:0];
-  assign tpram_bit_write = wen_a ? 64'h0 :
-   (~addr_a[0] ? 64'h00000000ffffffff : 64'hffffffff00000000);
+   assign tpram_bit_write = wen_a ? 8'h0 : (~addr_a[0] ? 8'h0f : 8'hf0);
 
 
-  sram512x64 U_TPRAM_512X64 (
+  sram512x64 U_TPRAM_512X64_1 (
       .clkA     (clk_a),
       .clkB     (clk_b),
       .cenA     (cen_b),
@@ -33,9 +32,23 @@ module sdpram1024x32 (
       .aA       (addr_b[9:1]),
       .aB       (addr_a[9:1]),
       .d        ({wdata_a, wdata_a}),
-      .bw       (tpram_bit_write),
+      .bw       (tpram_bit_write[3:0]),
       .q        (tpram_r_data)
   );
+  sram512x64 U_TPRAM_512X64_2 (
+      .clkA     (clk_a),
+      .clkB     (clk_b),
+      .cenA     (cen_b),
+      .cenB     (wen_a),
+      .deepsleep(1'b0),                //vincent
+      .powergate(1'b0),
+      .aA       (addr_b[9:1]),
+      .aB       (addr_a[9:1]),
+      .d        ({wdata_a, wdata_a}),
+      .bw       (tpram_bit_write[7:4]),
+      .q        (tpram_r_data)
+  );
+
 endmodule  // sdpram1024x32
 
 /*

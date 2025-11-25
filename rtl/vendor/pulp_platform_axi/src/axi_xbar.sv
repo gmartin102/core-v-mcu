@@ -247,8 +247,8 @@ module axi_xbar_intf #(
   input  logic                                                    clk_i,
   input  logic                                                    rst_ni,
   input  logic                                                    test_i,
-  AXI_BUS.Slave                                                   slv_ports [Cfg.NoSlvPorts-1:0],
-  AXI_BUS.Master                                                  mst_ports [Cfg.NoMstPorts-1:0],
+  AXI_BUS.Slave                                                   slv_ports [Cfg.NoSlvPorts], // -1:0],
+  AXI_BUS.Master                                                  mst_ports [Cfg.NoMstPorts], //-1:0],
   input  rule_t [Cfg.NoAddrRules-1:0]                             addr_map_i,
   input  logic  [Cfg.NoSlvPorts-1:0]                              en_default_mst_port_i,
   input  logic  [Cfg.NoSlvPorts-1:0][$clog2(Cfg.NoMstPorts+1)-1:0]  default_mst_port_i

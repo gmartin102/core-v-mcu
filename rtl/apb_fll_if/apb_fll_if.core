@@ -10,7 +10,14 @@ description: APB interface to FLL.
 filesets:
   files_rtl:
     files:
-    - apb_fll_if.sv
+    - apb_pll.sv
+    - clkgen.sv
+    - loop_filter.sv
+    - pd.sv
+    - ring_osc.sv
+    - ring_stage.sv
+    - rs_wrapper.sv
+    - sym_div.sv
     file_type: systemVerilogSource
 
 targets:

@@ -289,7 +289,7 @@ module soc_domain
   //********************************************************
 
   soc_peripherals #(
-      .MEM_ADDR_WIDTH(L2_MEM_ADDR_WIDTH + $clog2(NB_L2_BANKS)),
+      .MEM_ADDR_WIDTH(19),// L2_MEM_ADDR_WIDTH + $clog2(NB_L2_BANKS)),
       .APB_ADDR_WIDTH(12),
       .APB_DATA_WIDTH(32),
       .NB_CORES      (NB_CORES),

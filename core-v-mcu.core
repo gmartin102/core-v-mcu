@@ -15,6 +15,7 @@ filesets:
     - pulp-platform.org::tech_cells_generic
     - pulp-platform.org::fpnew
     - pulp-platform.org::fpu_div_sqrt_mvp
+    - openhwgroup.org:ip:apb_fll_if
     - openhwgroup.org:ip:apb_adv_timer
     - openhwgroup.org:ip:apb_gpio
     - openhwgroup.org:ip:apb_i2cs
@@ -91,10 +92,6 @@ filesets:
 #    - rtl/simulation/A3_top.sv
 #    - rtl/simulation/top1_wrapper.sv
     - rtl/simulation/a2_bootrom.sv
-    file_type: systemVerilogSource
-  not_emulation-rtl:
-    files:
-    - rtl/apb_fll_if/apb_pll.sv
     file_type: systemVerilogSource
   emulation-rtl:
     depend:

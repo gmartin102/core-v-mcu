@@ -18,7 +18,7 @@ filesets:
      - tfl/model/dsp_type1_bw.sv
      - tfl/model/bw_multiplier.sv
      - tfl/model/sdpram1024x32.sv
-     - sram512x64.v
+#     - sram512x64.v
     file_type: systemVerilogSource
 
 targets:

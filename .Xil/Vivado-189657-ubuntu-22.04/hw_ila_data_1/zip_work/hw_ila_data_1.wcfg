@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/gmartin/Projects/OpenHW/gam_clone/core-v-mcu/build/openhwgroup.org_systems_core-v-mcu_0/genesys2-vivado/openhwgroup.org_systems_core-v-mcu_0.hw/hw_1/wave/hw_ila_data_1/hw_ila_data_1.wdb" id="1">
+         <top_modules>
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0"></ZoomStartTime>
+      <ZoomEndTime time="1,025"></ZoomEndTime>
+      <Cursor1Time time="0"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="380"></NameColumnWidth>
+      <ValueColumnWidth column_width="70"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="10" />
+   <wave_markers>
+   </wave_markers>
+   <wvobject type="array" fp_name="i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/tcdm2_wdata">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/tcdm2_wdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">tcdm2_wdata[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/fsm_writechannels">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/fsm_writechannels[3:0]</obj_property>
+      <obj_property name="ObjectShortName">fsm_writechannels[3:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/fsm_loadacc">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/fsm_loadacc[3:0]</obj_property>
+      <obj_property name="ObjectShortName">fsm_loadacc[3:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/fsm_getfilters">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/fsm_getfilters[2:0]</obj_property>
+      <obj_property name="ObjectShortName">fsm_getfilters[2:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/fsm_getbias">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/fsm_getbias[2:0]</obj_property>
+      <obj_property name="ObjectShortName">fsm_getbias[2:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/fsm_conv2d">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/fsm_conv2d[4:0]</obj_property>
+      <obj_property name="ObjectShortName">fsm_conv2d[4:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/i_done2d">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/i_done2d</obj_property>
+      <obj_property name="ObjectShortName">i_done2d</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/tcdm2_req">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/tcdm2_req</obj_property>
+      <obj_property name="ObjectShortName">tcdm2_req</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/tcdm2_wen">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/tcdm2_wen</obj_property>
+      <obj_property name="ObjectShortName">tcdm2_wen</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/write2">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">i_core_v_mcu/i_soc_domain/soc_peripherals_i/i_efpga_subsystem/A3_eFPGA_wrapper/top/u_conv2d/write2</obj_property>
+      <obj_property name="ObjectShortName">write2</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+</wave_config>

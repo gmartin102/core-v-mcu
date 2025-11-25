@@ -29,9 +29,9 @@ module apb_node_wrap #(
         output logic [NB_MASTER-1:0] peripheral_rto_o,
 
         // Slave Port
-        APB_BUS.Slave                                    apb_slave,
+  APB_BUS.Slave                                    apb_slave,
         // Master Ports
-        APB_BUS.Master                                   apb_masters [NB_MASTER-1:0],
+        APB_BUS.Master                   apb_masters [0:NB_MASTER-1],
         // Configuration Port
         input  logic [NB_MASTER-1:0][APB_ADDR_WIDTH-1:0] start_addr_i,
         input  logic [NB_MASTER-1:0][APB_ADDR_WIDTH-1:0] end_addr_i

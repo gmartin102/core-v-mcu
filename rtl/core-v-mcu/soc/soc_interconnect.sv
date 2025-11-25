@@ -261,13 +261,13 @@ module soc_interconnect
       .AXI_DATA_WIDTH(32),
       .AXI_ID_WIDTH  (AXI_MASTER_ID_WIDTH),
       .AXI_USER_WIDTH(AXI_USER_WIDTH)
-  ) axi_bridge_2_axi_xbar_reversed[NR_MASTER_PORTS-1:0] ();
+  ) axi_bridge_2_axi_xbar_reversed[NR_MASTER_PORTS] ();
   AXI_BUS #(
       .AXI_ADDR_WIDTH(32),
       .AXI_DATA_WIDTH(32),
       .AXI_ID_WIDTH  (AXI_SLAVE_ID_WIDTH),
       .AXI_USER_WIDTH(AXI_USER_WIDTH)
-  ) axi_slaves_reversed[NR_AXI_SLAVE_PORTS-1:0] ();
+  ) axi_slaves_reversed[NR_AXI_SLAVE_PORTS] ();
 
   for (genvar i = 0; i < NR_MASTER_PORTS; i++) begin
     `AXI_ASSIGN(axi_bridge_2_axi_xbar_reversed[i], axi_bridge_2_axi_xbar[i])

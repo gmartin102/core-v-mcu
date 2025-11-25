@@ -42,7 +42,7 @@ module periph_bus_wrap #(
   APB_BUS #(
       .APB_ADDR_WIDTH(APB_ADDR_WIDTH),
       .APB_DATA_WIDTH(APB_DATA_WIDTH)
-  ) s_masters[NB_MASTER-1:0] ();
+  ) s_masters[0:NB_MASTER-1] ();
 
   APB_BUS #(
       .APB_ADDR_WIDTH(APB_ADDR_WIDTH),
